@@ -15,6 +15,10 @@ impl BlockFrostApi {
         /// List of redeemers of a specific script.
         scripts_redeemers(script_hash: &str) -> Vec<ScriptRedeemer> => "/scripts/{script_hash}/redeemers";
             ("https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1redeemers/get"),
+
+        /// List of datum cbor of a specific script.
+        datum_cbor(datum_hash: &str) -> DatumCbor => "/scripts/datum/{datum_hash}/cbor";
+            ("https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1datum~1%7Bdatum_hash%7D~1cbor/get"),
     }
 }
 
@@ -73,6 +77,12 @@ pub enum PurposeType {
     Mint,
     Cert,
     Reward,
+}
+
+/// Created by [`datum_cbor`](BlockFrostApi::datum_cbor) method.
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct DatumCbor {
+    pub cbor: String,
 }
 
 #[cfg(test)]
